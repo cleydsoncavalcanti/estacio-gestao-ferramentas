@@ -21,6 +21,13 @@ pip install Django==4.1.6
 django-admin startproject ferramentas
 
 
+#criar app
+cd ferramentas
+python manage.py startapp contas
+
+
+
+
 
 
 
