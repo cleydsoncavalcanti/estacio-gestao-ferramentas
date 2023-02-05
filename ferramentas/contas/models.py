@@ -10,6 +10,8 @@ class ToolType(models.Model):
     time_for_maintenance_in_days = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     history = HistoricalRecords()
+    class Meta:
+       verbose_name_plural= "Tipos de ferramenta"
 
 
 class Team(models.Model):
@@ -17,6 +19,8 @@ class Team(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     history = HistoricalRecords()
+    class Meta:
+       verbose_name_plural= "Equipes"
 
 
 class Tool(models.Model):
@@ -33,6 +37,8 @@ class Tool(models.Model):
     material = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     history = HistoricalRecords()
+    class Meta:
+       verbose_name_plural= "Ferramentas"
 
 
 class UserDetails(models.Model):
@@ -46,6 +52,8 @@ class UserDetails(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     history = HistoricalRecords()
+    class Meta:
+       verbose_name_plural= "Detalhes do usuário"
 
 
 class Booking(models.Model):
@@ -60,6 +68,8 @@ class Booking(models.Model):
     start_at = models.DateTimeField()
     end_at = models.DateTimeField()
     history = HistoricalRecords()
+    class Meta:
+       verbose_name_plural= "Reservas"
 
 
 class Maintenance(models.Model):
@@ -82,3 +92,5 @@ class Maintenance(models.Model):
     start_at = models.DateTimeField()
     end_at = models.DateTimeField()
     history = HistoricalRecords()
+    class Meta:
+       verbose_name_plural= "Manutenções"
