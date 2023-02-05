@@ -12,7 +12,7 @@ class ToolType(models.Model):
     history = HistoricalRecords()
 
 
-class Equipe(models.Model):
+class Team(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -22,9 +22,9 @@ class Equipe(models.Model):
 class Tool(models.Model):
     cod = models.CharField(max_length=30)
     description = models.TextField()
-    voltage = models.DecimalField()
+    voltage = models.DecimalField(max_digits=10, decimal_places=3)
     part_number = models.CharField(max_length=100)
-    size = models.DecimalField()
+    size = models.DecimalField(max_digits=10, decimal_places=3)
     unit_size = models.CharField(max_length=30)
     tool_type_id = models.ForeignKey(
         'ToolType',
@@ -35,21 +35,20 @@ class Tool(models.Model):
     history = HistoricalRecords()
 
 
-class Cadastro(models.Model):
+class UserDetails(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     cpf = models.CharField(max_length=30)
-    name = models.CharField(max_length=100)
     telephone = models.CharField(max_length=20)
     work_shift = models.CharField(max_length=30)
-    equipe_id = models.ForeignKey(
-        'Equipe',
+    team_id = models.ForeignKey(
+        'Team',
         on_delete=models.CASCADE,
     )
     created_at = models.DateTimeField(auto_now_add=True)
     history = HistoricalRecords()
 
 
-class Reservas(models.Model):
+class Booking(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     tool_id = models.ForeignKey(
         'Tool',
