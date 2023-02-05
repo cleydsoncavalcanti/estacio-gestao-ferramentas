@@ -17,3 +17,10 @@ python -m pip install <package-name>
 #https://docs.djangoproject.com/en/4.1/
 pip install Django==4.1.6
 
+#projeto django
+django-admin startproject ferramentas
+
+
+
+
+
