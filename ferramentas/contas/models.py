@@ -1,76 +1,85 @@
 from django.db import models
 from django.contrib.auth.models import User
+from simple_history.models import HistoricalRecords
+# https://django-simple-history.readthedocs.io/en/latest/quick_start.html#install
 
 
-class TipoFerramenta(models.Model):
-    nome = models.CharField(max_length=100)
-    descricao = models.TextField()
+class ToolType(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    time_for_maintenance_in_days = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
+    history = HistoricalRecords()
 
 
 class Equipe(models.Model):
-    nome = models.CharField(max_length=100)
-    descricao = models.TextField()
+    name = models.CharField(max_length=100)
+    description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    history = HistoricalRecords()
 
 
-class Ferramenta(models.Model):
-    codigo = models.CharField(max_length=30)
-    descricao = models.TextField()
-    voltagem = models.DecimalField()
+class Tool(models.Model):
+    cod = models.CharField(max_length=30)
+    description = models.TextField()
+    voltage = models.DecimalField()
     part_number = models.CharField(max_length=100)
-    tamanho = models.DecimalField()
-    unidade = models.CharField(max_length=30)
-    tipo_id = models.ForeignKey(
-        'TipoFerramenta',
+    size = models.DecimalField()
+    unit_size = models.CharField(max_length=30)
+    tool_type_id = models.ForeignKey(
+        'ToolType',
         on_delete=models.CASCADE,
     )
     material = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
+    history = HistoricalRecords()
 
 
 class Cadastro(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     cpf = models.CharField(max_length=30)
-    nome = models.CharField(max_length=100)
-    telefone = models.CharField(max_length=20)
-    turno = models.CharField(max_length=30)
+    name = models.CharField(max_length=100)
+    telephone = models.CharField(max_length=20)
+    work_shift = models.CharField(max_length=30)
     equipe_id = models.ForeignKey(
         'Equipe',
         on_delete=models.CASCADE,
     )
     created_at = models.DateTimeField(auto_now_add=True)
+    history = HistoricalRecords()
 
 
 class Reservas(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    ferramenta_id = models.ForeignKey(
-        'Ferramenta',
+    tool_id = models.ForeignKey(
+        'Tool',
         on_delete=models.CASCADE,
     )
     created_at = models.DateTimeField(auto_now_add=True)
-    dt_prevista_inicio = models.DateTimeField()
-    dt_prevista_termino = models.DateTimeField()
-    dt_inicio = models.DateTimeField()
-    dt_termino = models.DateTimeField()
+    scheduled_start_at = models.DateTimeField()
+    scheduled_end_at = models.DateTimeField()
+    start_at = models.DateTimeField()
+    end_at = models.DateTimeField()
+    history = HistoricalRecords()
 
 
-class Manutencao(models.Model):
-    ferramenta_id = models.ForeignKey(
-        'Ferramenta',
+class Maintenance(models.Model):
+    tool_id = models.ForeignKey(
+        'Tool',
         on_delete=models.CASCADE,
     )
-    TIPOS_MANUTENCAO = [
+    TYPES_OF_MAINTENANCE = [
         (1, 'Preventiva'),
         (2, 'Corretiva')
     ]
-    tipo = models.CharField(
+    type = models.CharField(
         max_length=2,
-        choices=TIPOS_MANUTENCAO,
+        choices=TYPES_OF_MAINTENANCE,
         default=1,
     )
     created_at = models.DateTimeField(auto_now_add=True)
-    dt_prevista_inicio = models.DateTimeField()
-    dt_prevista_termino = models.DateTimeField()
-    dt_inicio = models.DateTimeField()
-    dt_termino = models.DateTimeField()
+    scheduled_start_at = models.DateTimeField()
+    scheduled_end_at = models.DateTimeField()
+    start_at = models.DateTimeField()
+    end_at = models.DateTimeField()
+    history = HistoricalRecords()
