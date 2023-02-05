@@ -1,5 +1,7 @@
 # estacio-gestao-ferramentas
 
+cd ferramentas
+
 #criar venv
 <!-- https://www.youtube.com/watch?v=LndJOSwRYOM&list=PLHWfNMxB2F4HdKbo8zdgXyxVDOxH429Ko&index=5 -->
 python3 -m venv venv
@@ -41,6 +43,11 @@ cleydson
 
 python manage.py runserver 7000
 http://127.0.0.1:7000/admin
+
+cd ferramentas
+python manage.py makemigrations
+
+python manage.py migrate
 
 
 
