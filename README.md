@@ -25,6 +25,29 @@ django-admin startproject ferramentas
 cd ferramentas
 python manage.py startapp contas
 
+python manage.py migrate
+
+python manage.py runserver
+
+#definir porta
+python manage.py runserver 7000
+
+control + c
+
+python manage.py createsuperuser
+
+cleydson
+123456
+
+python manage.py runserver 7000
+http://127.0.0.1:7000/admin
+
+
+
+
+
+
+
 
 
 
