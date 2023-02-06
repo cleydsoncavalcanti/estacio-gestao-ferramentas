@@ -6,6 +6,7 @@ cd ferramentas
 <!-- https://www.youtube.com/watch?v=LndJOSwRYOM&list=PLHWfNMxB2F4HdKbo8zdgXyxVDOxH429Ko&index=5 -->
 python3 -m venv venv
 
+cd .. 
 #ativar
 source venv/bin/activate
 
